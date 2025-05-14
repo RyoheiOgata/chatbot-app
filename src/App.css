@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +24,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -31,6 +34,22 @@
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
+}
+
+.app-container {
+  width: 80%;
+  /* 例: 画面幅の80%にする */
+  /* width: 600px; */
+  /* 例: 固定幅にする場合はこちら */
+  max-width: 900px;
+  /* 例: 最大幅を指定 (広がりすぎないように) */
+  min-width: 400px;
+  /* 例: 最小幅を指定 (縮みすぎないように) */
+  margin: 0 auto;
+  /* 中央揃えにする場合 */
+  padding: 20px;
+  /* コンテンツの周りに余白を設ける場合 (任意) */
+  /* 他に必要なスタイルがあれば追加 */
 }
 
 .card {
