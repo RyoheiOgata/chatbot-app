@@ -6,8 +6,6 @@ function App() {
 
   return (
     <Box className="app-container">
-      
-      {import.meta.env.VITE_GEMINI_API_KEY}
       <Chat />
     </Box>
   )
