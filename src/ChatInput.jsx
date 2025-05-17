@@ -4,8 +4,16 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 
+
 export function ChatInput({ addHistory }) {
     const [text, setText] = useState();
+    
+
+    const handleClick = () => {
+
+        addHistory({ input: text, output: 'こんにちわ', generated: true });
+        setText('');
+    };
 
 
     return (
@@ -16,6 +24,7 @@ export function ChatInput({ addHistory }) {
             flexDirection: 'column', // 子要素を縦に並べる（TextFieldとButtonのコンテナ用）
             position: 'relative', // Buttonを絶対位置指定するための基準点
         }}>
+
             <TextField
                 id="outlined-multiline-flexible"
                 multiline
@@ -38,10 +47,7 @@ export function ChatInput({ addHistory }) {
             }}>
                 <Button
                     endIcon={<SendIcon />}
-                    onClick={() => {
-                        addHistory({ ai: false, text: text });
-                        setText('');
-                    }} />
+                    onClick={handleClick} />
             </Box>
         </Box>
     )
