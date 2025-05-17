@@ -1,9 +1,12 @@
 import Box from '@mui/material/Box';
+import { ResponseBubble } from './ResponseBubble';
+
 
 
 
 export function Bubble({ line }) {
-    
+
+
 
     return (
         <Box>
@@ -17,15 +20,8 @@ export function Bubble({ line }) {
             </Box>
 
             {line.generated &&
-                <Box sx={{
-                    border: 1,
-                    borderRadius: '0 15px 15px 15px',
-                    borderColor: 'red',
-                    m: '10px',
-                    whiteSpace: "pre-wrap"
-                }}>
-                    {line.output}
-                </Box>}
+                <ResponseBubble line={line} />
+            }
         </Box>
 
     )

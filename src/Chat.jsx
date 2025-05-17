@@ -1,13 +1,9 @@
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import { Talk } from "./Talk";
 import { ChatInput } from "./ChatInput";
 import { GoogleGenAI } from "@google/genai";
-import { ErrorBoundary } from 'react-error-boundary';
-import { TestWeather } from "./TestWeather";
-
-import { useQuery } from "@tanstack/react-query";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
@@ -15,7 +11,6 @@ const queryClient = new QueryClient({
         }
     }
 });
-
 
 
 export function Chat() {
@@ -27,20 +22,12 @@ export function Chat() {
 
     return (
         <>
-
-            <Suspense fallback={<p>Loading...</p>}>
-                <ErrorBoundary fallback={<div>エラーが発生しました。</div>}>
-                    <QueryClientProvider client={queryClient}>
-                        <TestWeather />
-                    </QueryClientProvider>
-                </ErrorBoundary>
-            </Suspense >
-
-
             <Talk
                 history={history} />
-            <ChatInput
-                addHistory={addHistory} />
+            <QueryClientProvider client={queryClient}>
+                <ChatInput
+                    addHistory={addHistory} />
+            </QueryClientProvider>
             {import.meta.env.VITE_GEMINI_API_KEY}
         </>
     )
