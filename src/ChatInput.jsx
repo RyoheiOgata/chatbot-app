@@ -3,69 +3,51 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import axios from "axios";
+import { GoogleGenAI } from "@google/genai";
 
-import { useQuery } from "@tanstack/react-query";
 
 
 const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
-const fetchWeather = async () => {
-    console.log('fetchWeatherスタート')
+async function fetchWeather(params) {
     await sleep(2000);
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Tokyo&lang=ja&appid=1ae64f8e15da22af443aac6b1e5b87cd`);
-    if (res.ok) {
-        return res.json()
-    }
-    throw new Error(res.statusText);
-};
+    const response = await axios.get('https://api.openweathermap.org/data/2.5/weather?q=Tokyo&lang=ja&appid=1ae64f8e15da22af443aac6b1e5b87cd');
+    const data = response.data;
+    return data?.weather?.[0]?.description;
 
+}
+
+// const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
+const ai = new GoogleGenAI({ apiKey: 'abc' });
+async function fetchAnswer(text) {
+    const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: text,
+    });
+    return response.text;
+}
 
 export function ChatInput({ addHistory }) {
     const [text, setText] = useState();
-    const {
-        data,
-        isLoading,
-        isError,
-        error,
-        refetch } = useQuery({ queryKey: ['weather'], queryFn: fetchWeather });
 
     const handleClick = async () => {
-        if (!text.trim()) { // 入力が空の場合は何もしない（任意）
-            return;
-        }
-        try {
-            // refetch() を実行し、完了を待つ
-            // refetch() は Promise<UseQueryResult> を返す
-            // その Promise が解決されたときの UseQueryResult から data を取得できる
-            const { data: fetchedData, isSuccess } = await refetch();
+        const userMessage = { role: 'user', content: text };
+        setText(''); // 入力フィールドをクリア
 
-            if (isSuccess && fetchedData) {
-                // 成功し、データが取得できたらaddHistoryを呼び出す
-                await addHistory({
-                    input: text,
-                    output: fetchedData?.weather?.[0]?.description,
-                    generated: true
-                });
-                setText(''); // 入力フィールドをクリア
-            } else {
-                // データ取得に失敗した場合の処理（任意）
-                console.error("天気の取得に失敗しました。");
-                // ユーザーにエラーを通知するなどの処理を追加できます
-                await addHistory({
-                    input: text,
-                    output: "天気情報を取得できませんでした。", // エラーメッセージを履歴に追加
-                    generated: true
-                });
-            }
-        } catch (e) {
-            // refetch 中にエラーが発生した場合の処理
-            console.error("handleClick内のエラー:", e);
-            await addHistory({
-                input: text,
-                output: "エラーが発生しました。",
-                generated: true
-            });
-            // setText('');
+        try {
+            // const response = await fetchAnswer(text);
+            const response = await fetchWeather(text);
+            const systemMessage = {
+                role: 'system',
+                content: response
+            };
+            addHistory(userMessage, systemMessage);
+
+        } catch (error) {
+            console.log(error);
         }
+
+
     };
 
 
