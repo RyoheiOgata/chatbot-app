@@ -9,7 +9,7 @@ import { GoogleGenAI } from "@google/genai";
 
 
 const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
-async function fetchWeather(params) {
+async function fetchWeather() {
     await sleep(2000);
     const api_key = import.meta.env.VITE_WEATHER_API_KEY
     const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Tokyo&lang=ja&appid=${api_key}`);
@@ -31,13 +31,18 @@ export function ChatInput({ addHistory }) {
     const [text, setText] = useState();
 
     const handleClick = async () => {
+        if (!text) return;
+
         const userMessage = { role: 'user', content: text };
+        let systemMessage = { role: 'system', content: 'Loading...' };
+
+        addHistory(userMessage, systemMessage);
         setText(''); // 入力フィールドをクリア
 
         try {
             // const response = await fetchAnswer(text);
-            const response = await fetchWeather(text);
-            const systemMessage = {
+            const response = await fetchWeather();
+            systemMessage = {
                 role: 'system',
                 content: response
             };
