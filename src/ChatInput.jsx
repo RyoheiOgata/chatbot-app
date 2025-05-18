@@ -11,14 +11,14 @@ import { GoogleGenAI } from "@google/genai";
 const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
 async function fetchWeather(params) {
     await sleep(2000);
-    const response = await axios.get('https://api.openweathermap.org/data/2.5/weather?q=Tokyo&lang=ja&appid=1ae64f8e15da22af443aac6b1e5b87cd');
+    const api_key = import.meta.env.VITE_WEATHER_API_KEY
+    const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Tokyo&lang=ja&appid=${api_key}`);
     const data = response.data;
     return data?.weather?.[0]?.description;
-
 }
 
-// const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
-const ai = new GoogleGenAI({ apiKey: 'abc' });
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
+// const ai = new GoogleGenAI({ apiKey: 'abc' });
 async function fetchAnswer(text) {
     const response = await ai.models.generateContent({
         model: "gemini-2.0-flash",
