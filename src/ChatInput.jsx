@@ -28,7 +28,7 @@ async function fetchAnswer(text) {
 }
 
 export function ChatInput({ addHistory }) {
-    const [text, setText] = useState();
+    const [text, setText] = useState('');
 
     const handleClick = async () => {
         if (!text) return;
@@ -57,38 +57,27 @@ export function ChatInput({ addHistory }) {
 
 
     return (
-        <Box sx={{
-            border: 1,
-            borderRadius: '10px',
-            display: 'flex', // Flexboxコンテナとして設定
-            flexDirection: 'column', // 子要素を縦に並べる（TextFieldとButtonのコンテナ用）
-            position: 'relative', // Buttonを絶対位置指定するための基準点
-        }}>
-
-            <TextField
-                id="outlined-multiline-flexible"
-                multiline
-                maxRows={4}
+        <div className='border bg-mint-500'>
+            <input
+                // multiline
+                // maxRows={4}
                 variant="outlined"
-                sx={{
-                    'fieldset': {
-                        border: 'none'
-                    },
-                    flexGrow: 1,
-                }}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
 
             />
-            <Box sx={{
+            <div sx={{
                 display: 'flex',
                 justifyContent: 'flex-end', // Buttonを右端に寄せる
                 padding: '8px' // ボタン周りの余白（任意）
             }}>
-                <Button
-                    endIcon={<SendIcon />}
-                    onClick={handleClick} />
-            </Box>
-        </Box>
+                <button
+                    onClick={handleClick}>
+                    <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m9 5 7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </div >
     )
 }

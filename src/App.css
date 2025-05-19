@@ -36,22 +36,6 @@
   }
 }
 
-.app-container {
-  width: 80%;
-  /* 例: 画面幅の80%にする */
-  /* width: 600px; */
-  /* 例: 固定幅にする場合はこちら */
-  max-width: 900px;
-  /* 例: 最大幅を指定 (広がりすぎないように) */
-  min-width: 400px;
-  /* 例: 最小幅を指定 (縮みすぎないように) */
-  margin: 0 auto;
-  /* 中央揃えにする場合 */
-  padding: 20px;
-  /* コンテンツの周りに余白を設ける場合 (任意) */
-  /* 他に必要なスタイルがあれば追加 */
-}
-
 .card {
   padding: 2em;
 }
@@ -61,3 +45,9 @@
 }
 
 @import 'tailwindcss';
+
+@theme {
+  --color-mint-500: oklch(0.72 0.11 178);
+}
+
+/* https://www.schemecolor.com/harmony-of-blue.php */

@@ -1,16 +1,15 @@
-import Box from '@mui/material/Box';
 import { Bubble } from "./Bubble";
 
 
 export function Talk({ history }) {
 
     return (
-        <Box >
+        <div >
             {history.map((h, i) => (
                 <Bubble
                     line={h}
                     key={i} />
             ))}
-        </Box>
+        </div>
     )
 }
