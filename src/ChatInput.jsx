@@ -57,22 +57,17 @@ export function ChatInput({ addHistory }) {
 
 
     return (
-        <div className='border bg-mint-500'>
-            <input
-                // multiline
-                // maxRows={4}
-                variant="outlined"
+        <div className='border p-4 rounded-lg space-x-2'>
+            <textarea
+                rows={4}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-
+                className="textarea textarea-ghost textarea-lg"
             />
-            <div sx={{
-                display: 'flex',
-                justifyContent: 'flex-end', // Buttonを右端に寄せる
-                padding: '8px' // ボタン周りの余白（任意）
-            }}>
+            <div>
                 <button
-                    onClick={handleClick}>
+                    onClick={handleClick}
+                    className="btn ml-auto">
                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m9 5 7 7-7 7" />
                     </svg>

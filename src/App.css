@@ -1,10 +1,11 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+ #root {
+   max-width: 1280px;
+   margin: 0 auto;
+   padding: 2rem;
+   text-align: center;
+ }
 
+ /*
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -42,12 +43,13 @@
 
 .read-the-docs {
   color: #888;
-}
+} */
 
-@import 'tailwindcss';
+ @import 'tailwindcss';
 
-@theme {
-  --color-mint-500: oklch(0.72 0.11 178);
-}
+ @plugin "daisyui" {
+   themes: pastel --default, dark --prefersdark;
+ }
 
-/* https://www.schemecolor.com/harmony-of-blue.php */
+
+ /* https://www.schemecolor.com/harmony-of-blue.php */

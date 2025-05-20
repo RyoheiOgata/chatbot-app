@@ -14,8 +14,8 @@ export function Chat() {
         <>
             <Talk
                 history={history} />
-                <ChatInput
-                    addHistory={addHistory} />
+            <ChatInput
+                addHistory={addHistory} />
         </>
     )
 }
