@@ -1,13 +1,12 @@
 import './App.css'
 import { Chat } from './Chat'
-import Box from '@mui/material/Box';
 
 function App() {
 
   return (
-    <Box className="app-container">
+    <div>
       <Chat />
-    </Box>
+    </div>
   )
 }
 
