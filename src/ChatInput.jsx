@@ -57,14 +57,14 @@ export function ChatInput({ addHistory }) {
 
 
     return (
-        <div className='border p-4 rounded-lg space-x-2'>
+        <div className='border p-4 rounded-lg space-x-2 fixed bottom-10 left-0 w-full'>
             <textarea
                 rows={4}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                className="textarea textarea-ghost textarea-lg"
+                className="textarea textarea-ghost border-color-white input-lg w-full"
             />
-            <div>
+            <div className="flex justify-end">
                 <button
                     onClick={handleClick}
                     className="btn ml-auto">
