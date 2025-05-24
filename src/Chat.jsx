@@ -11,11 +11,11 @@ export function Chat() {
 
 
     return (
-        <>
+        <div className="flex flex-col justify-between h-full">
             <Talk
                 history={history} />
             <ChatInput
                 addHistory={addHistory} />
-        </>
+        </div>
     )
-}
+};

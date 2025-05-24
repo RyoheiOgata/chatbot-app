@@ -24,6 +24,7 @@ async function fetchAnswer(text) {
         model: "gemini-2.0-flash",
         contents: text,
     });
+    console.log(response.text);
     return response.text;
 }
 
@@ -57,17 +58,17 @@ export function ChatInput({ addHistory }) {
 
 
     return (
-        <div className='border p-4 rounded-lg space-x-2 fixed bottom-10 left-0 w-full'>
+        <div className='border p-4 rounded-lg space-x-2 flex-none'>
             <textarea
                 rows={4}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                className="textarea textarea-ghost border-color-white input-lg w-full"
+                className="textarea textarea-ghost border-color-white input-lg w-full focus:outline-none"
             />
             <div className="flex justify-end">
                 <button
                     onClick={handleClick}
-                    className="btn ml-auto">
+                    className="btn btn-primary ml-auto">
                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m9 5 7 7-7 7" />
                     </svg>

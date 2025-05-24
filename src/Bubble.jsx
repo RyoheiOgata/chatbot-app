@@ -1,3 +1,4 @@
+import ReactMarkdown from 'react-markdown';
 
 export function Bubble({ line }) {
     return (
@@ -7,7 +8,11 @@ export function Bubble({ line }) {
                 : 'chat-end'
             }`}>
             <div className="chat-bubble chat-bubble-primary">
-                {line.content}
+                {line.role === 'system'
+                    ? <ReactMarkdown>{line.content}</ReactMarkdown>
+                    : line.content}
+
+
             </div>
         </div>
     )
